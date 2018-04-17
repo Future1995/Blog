@@ -25,7 +25,7 @@ namespace HwaTec.Blog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          
+
             services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IRepository<Article>, Repository<Article>>();
             services.AddScoped<IArticleService, ArticleService>();
@@ -56,6 +56,10 @@ namespace HwaTec.Blog
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Article}/{action=Index}/{id?}");
+                routes.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }
