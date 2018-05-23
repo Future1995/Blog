@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UEditor.Core;
 
 namespace HwaTec.Blog
 {
@@ -30,6 +31,8 @@ namespace HwaTec.Blog
             services.AddScoped<IRepository<Article>, Repository<Article>>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<DbContext, BlogDbContext>();
+
+            services.AddUEditorService();
 
             services.AddMemoryCache();
             services.AddSession();
@@ -55,7 +58,7 @@ namespace HwaTec.Blog
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Article}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                   name: "areas",
                   template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
