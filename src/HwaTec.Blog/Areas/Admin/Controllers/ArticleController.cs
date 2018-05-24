@@ -28,12 +28,13 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             Article article = new Article
             {
                 CreateTime = DateTime.Now,
+
                 Title = title,
                 Content = content,
                 ModifyTime = DateTime.Now
             };
             _articleService.Add(article);
-            return Redirect("/Home/Index");
+            return Json("ok");
         }
         public IActionResult Details(int id)
         {

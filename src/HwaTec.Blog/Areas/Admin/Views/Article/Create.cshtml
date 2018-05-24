@@ -7,12 +7,39 @@
 <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-        <script id="editor" type="text/plain" style="width:100%;height:600px;">
-        </script>
+        <div class="form-group">
+            <h1 for="name">标题</h1>
+            <input id="txt_title" type="text" class="form-control" placeholder="标题">
+        </div>
+        <div class="form-group">
+            <script id="editor" type="text/plain" style="width:100%;height:600px;">
+            </script>
+            <br />
+            <button id="btnSubmit"  class="btn btn-success">保存</button>
+        </div>
+
+
     </div>
 </div>
 
 
 <script type="text/javascript">
+
     var ue = UE.getEditor('editor');
+
+
+    $("#btnSubmit").click(function () {
+        var title = $("#txt_title").val();
+        var content = ue.getContent();
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/Article/Create',
+            data: { title: title, content: content },
+            success: function (data) {
+                console.log(data);
+                window.location.href = "/Admin/Home";
+            },
+            //dataType: 'JSON'
+        });
+    });
 </script>
