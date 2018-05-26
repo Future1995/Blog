@@ -23,13 +23,13 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string title, string content)
+        public IActionResult Create(string title, string synopsis, string content)
         {
             Article article = new Article
             {
                 CreateTime = DateTime.Now,
-
                 Title = title,
+                Synopsis = synopsis,
                 Content = content,
                 ModifyTime = DateTime.Now
             };

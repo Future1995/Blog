@@ -3,20 +3,14 @@
     ViewData["Title"] = "Content";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-        <article class="am-article blog-article-p">
-            <div class="am-article-hd">
-                <h1 class="am-article-title blog-text-center">@Model.Title</h1>
-                <p class="am-article-meta blog-text-center">
-                    <span><a href="#" class="blog-color">文章 &nbsp;</a></span>-
-                    <span><a href="#">@Model.CreateId</a></span>-
-                    <span><a href="#">@Model.CreateTime</a></span>
-                </p>
-            </div>
-            <div class="am-article-bd">
-                <img src="~/Assets/i/f17.jpg" alt="" class="blog-entry-img blog-article-margin">
-                <p class="class=" am-article-lead"">
-                    @Model.Content
-                </p>
-            </div>
-        </article>
- 
+<div class="blogitem">
+    <article>
+        <h2 class="title">@Model.Title</h2>
+        <ul class="text">
+            @Html.Raw(Model.Content)
+        </ul>
+        <div class="textfoot">
+            <a href="#">评论</a><a href="#">转载</a>
+        </div>
+    </article>
+</div>

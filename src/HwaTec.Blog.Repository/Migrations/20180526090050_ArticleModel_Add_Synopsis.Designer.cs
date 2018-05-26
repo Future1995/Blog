@@ -11,9 +11,10 @@ using System;
 namespace HwaTec.Blog.Repository.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180526090050_ArticleModel_Add_Synopsis")]
+    partial class ArticleModel_Add_Synopsis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

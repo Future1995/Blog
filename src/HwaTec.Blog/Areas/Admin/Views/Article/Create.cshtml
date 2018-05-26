@@ -30,10 +30,12 @@
     $("#btnSubmit").click(function () {
         var title = $("#txt_title").val();
         var content = ue.getContent();
+        var contentTxt = ue.getPlainTxt();
+        var synopsis=  contentTxt.length > 200 ? contentTxt.substring(0, 200) : contentTxt;
         $.ajax({
             type: 'POST',
             url: '/Admin/Article/Create',
-            data: { title: title, content: content },
+            data: { title: title, synopsis: synopsis ,content: content },
             success: function (data) {
                 console.log(data);
                 window.location.href = "/Admin/Home";

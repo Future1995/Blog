@@ -15,7 +15,7 @@ header nav ul li { line-height: 43px; display: block }
 header nav ul li a { color: #484848; float: left; padding: 0 20px; margin-right: 2px; }
 header nav ul li a:hover, #nav_current { color: #fff; background: #F16E50; transform: skew(-20deg); -webkit-transform: skew(-20deg); -moz-transform: skew(-20deg); -o-transform: skew(-20deg); }
 /* mainContent */
-.mainContent { background: #E8E5DD; width: 1000px; margin: 20px auto; overflow: hidden }
+.mainContent { background: #E8E5DD; width: 1200px; margin: 20px auto; overflow: hidden }
 aside { width: 270px; float: left; }
 .avatar { margin: 20px auto; width: 160px; height: 160px; border-radius: 160px; -moz-border-radius: 160px; -webkit-border-radius: 160px; overflow: hidden; }
 .avatar a { display: block; padding-top: 97px; width: 160px; height: 63px; background: url(../images/photo.jpg) no-repeat; background-size: 160px 160px }
@@ -37,7 +37,7 @@ aside section h2 { background: #f16e50; color: #FFF; padding-left: 30px; height:
 .newpic ul li img:hover { opacity: 0.5 }
 .taglist ul li a { padding: 2px 5px; display: inline-block; float: left; margin-right: 5px; color: #454545; }
 .taglist ul li a:hover { background: #f16e50; color: #fff; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px }
-.blogitem { width: 730px; background: #fff; float: right }
+.blogitem { width: 900px; background: #fff; float: right }
 .blogitem article { border-bottom: #F4F3EF 40px solid; }
 .title { background: url(../images/titlebg.png) no-repeat 5% 80%; font-size: 20px; line-height: 28px; display: inline-block; padding: 38px 60px 8px 80px; border-bottom: 1px solid #e2e2e2; width: 100%; }
 .title a { color: #454545; }
