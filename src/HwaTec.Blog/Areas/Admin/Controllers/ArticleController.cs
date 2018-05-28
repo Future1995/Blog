@@ -11,11 +11,14 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArticleController : Controller
     {
+
+
         private readonly IArticleService _articleService;
         public ArticleController(IArticleService articleService)
         {
             _articleService = articleService;
         }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -36,10 +39,18 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             _articleService.Add(article);
             return Json("ok");
         }
+
         public IActionResult Details(int id)
         {
             var article = _articleService.GetById(id);
             return View(article);
+        }
+
+        [HttpGet]
+        public IActionResult GetArticles() {
+            var totalCount = 0;
+            var articles = _articleService.LoadEntities(out totalCount);
+            return Json(new { code=0,msg="",count= totalCount, data=articles });
         }
     }
 }

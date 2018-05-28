@@ -1,9 +1,95 @@
-﻿@{ 
+﻿@using HwaTec.Blog.Model
+@model IQueryable<Article>
+@{ 
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-        <table id="shop"></table>
+        @*<div class="layui-btn-group demoTable">
+            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+            <button class="layui-btn" data-type="isAll">验证是否全选</button>
+        </div>*@
+        <table lay-filter="article-table" id="articleTable">
+            <thead>
+                <tr>
+                    <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                    <th lay-data="{field:'id', width:100}">Id</th>
+                    <th lay-data="{field:'title', width:500}">标题</th>
+                    <th lay-data="{field:'create_time', minWidth: 180}">创建时间</th>
+                    <th lay-data="{field:'modify_time', minWidth: 180}">修改时间</th>
+                    <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#article-bar'}">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var article in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>@article.Id</td>
+                    <td>@article.Title</td>
+                    <td>@article.CreateTime</td>
+                    <td>@article.ModifyTime</td>
+                </tr>
+        }
+            </tbody>
+        </table>
+
+        <script type="text/html" id="article-bar">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
     </div>
 </div>
+
+<script>
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+
+        table.init('article-table', { //转化静态表格
+            //height: 'full-500'
+        }); 
+
+        //监听工具条
+        table.on('tool(article-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                window.location.href = "/Home/Details?id=" + data.id;
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            }
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function () { //获取选中数据
+                var checkStatus = table.checkStatus('articleTable')
+                    , data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('articleTable')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('articleTable');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+</script>

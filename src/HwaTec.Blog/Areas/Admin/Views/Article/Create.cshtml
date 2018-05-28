@@ -17,8 +17,6 @@
             <br />
             <button id="btnSubmit"  class="btn btn-success">保存</button>
         </div>
-
-
     </div>
 </div>
 
@@ -30,7 +28,7 @@
     $("#btnSubmit").click(function () {
         var title = $("#txt_title").val();
         var content = ue.getContent();
-        var contentTxt = ue.getPlainTxt();
+        var contentTxt = ue.getContentTxt();
         var synopsis=  contentTxt.length > 200 ? contentTxt.substring(0, 200) : contentTxt;
         $.ajax({
             type: 'POST',
