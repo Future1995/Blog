@@ -52,5 +52,18 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             var articles = _articleService.LoadEntities(out totalCount);
             return Json(new { code=0,msg="",count= totalCount, data=articles });
         }
+
+        public IActionResult Update(int id)
+        {
+           var article= _articleService.GetById(id);
+            return View(article);
+        }
+        [HttpPost]
+        public IActionResult Update(Article article)
+        {
+            article.ModifyTime = DateTime.Now;
+            _articleService.Update(article);
+            return View(article);
+        }
     }
 }
