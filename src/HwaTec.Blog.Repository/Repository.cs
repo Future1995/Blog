@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -39,7 +40,6 @@ namespace HwaTec.Blog.Repository
             _context.Entry<T>(entity).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
         }
-
         public IQueryable<T> LoadEntities(Expression<Func<T, bool>> whereLambda)
         {
             return _context.Set<T>().Where(whereLambda);
@@ -75,6 +75,24 @@ namespace HwaTec.Blog.Repository
         public int SaveChanges()
         {
             return _context.SaveChanges();
+        }
+
+        public virtual void DeleteEntities(IEnumerable<T> entities)
+        {
+            try
+            {
+                if (entities == null)
+                    throw new ArgumentNullException(nameof(entities));
+
+                foreach (var entity in entities)
+                    Entities.Remove(entity);
+
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw  ex;
+            }
         }
 
         protected virtual DbSet<T> Entities

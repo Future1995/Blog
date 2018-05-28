@@ -13,6 +13,7 @@ namespace HwaTec.Blog.Repository
         IQueryable<T> LoadEntities(Expression<Func<T, bool>> whereLambda);
         IQueryable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderbyLambda, bool isAsc);
         bool DeleteEntity(T entity);
+        void DeleteEntities(IEnumerable<T> entities);
         bool UpdateEntity(T entity);
         T AddEntity(T entity);
         int SaveChanges();

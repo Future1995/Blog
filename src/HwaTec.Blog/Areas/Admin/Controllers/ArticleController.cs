@@ -47,15 +47,16 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetArticles() {
+        public IActionResult GetArticles()
+        {
             var totalCount = 0;
             var articles = _articleService.LoadEntities(out totalCount);
-            return Json(new { code=0,msg="",count= totalCount, data=articles });
+            return Json(new { code = 0, msg = "", count = totalCount, data = articles });
         }
 
         public IActionResult Update(int id)
         {
-           var article= _articleService.GetById(id);
+            var article = _articleService.GetById(id);
             return View(article);
         }
         [HttpPost]
@@ -64,6 +65,14 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             article.ModifyTime = DateTime.Now;
             _articleService.Update(article);
             return View(article);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(string ids)
+        {
+            var idList = ids.Split(",").Select(x => Convert.ToInt32(x));
+            _articleService.Delete(idList);
+            return Json("ok");
         }
     }
 }

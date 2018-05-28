@@ -15,5 +15,7 @@ namespace HwaTec.Blog.Service
         Article Add(Article article);
 
         bool Update(Article article);
+
+        bool Delete(IEnumerable<int> ids);
     }
 }

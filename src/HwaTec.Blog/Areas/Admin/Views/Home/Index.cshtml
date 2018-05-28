@@ -56,13 +56,24 @@
 
         //监听工具条
         table.on('tool(article-table)', function (obj) {
-            var data = obj.data;
+            var row = obj.data;
             if (obj.event === 'detail') {
                 window.location.href = "/Home/Details?id=" + data.id;
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/Article/Delete',
+                        data: { ids: row.id },
+                        success: function (data) {
+                            console.log(data);
+                            if (data == "ok") { 
+                                obj.del();
+                                layer.close(index);
+                            }
+                        },
+                        //dataType: 'JSON'
+                    });             
                 });
             } else if (obj.event === 'edit') {
                 window.location.href = "/Admin/Article/Update?id=" + data.id;
