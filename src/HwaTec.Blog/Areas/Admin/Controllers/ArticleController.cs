@@ -55,7 +55,7 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             var totalCount = 0;
             var query = _articleService.LoadEntities(out totalCount);
             var articles = from a in query
-                           where a.Id == LoginUser.Id
+                           where a.CreateId == LoginUser.Id
                            select a;
             return Json(new { code = 0, msg = "", count = totalCount, data = articles });
         }
