@@ -1,16 +1,16 @@
 ﻿@using HwaTec.Blog.Model
 @model IQueryable<Article>
-@{ 
+@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-        @*<div class="layui-btn-group demoTable">
-            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-            <button class="layui-btn" data-type="isAll">验证是否全选</button>
-        </div>*@
+        <div class="layui-btn-group btn-operation">
+            @*<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>*@
+            <button class="layui-btn" data-type="deleteSelectAll">删除选中的</button>
+            @*  <button class="layui-btn" data-type="isAll">验证是否全选</button>*@
+        </div>
         <table lay-filter="article-table" id="articleTable">
             <thead>
                 <tr>
@@ -24,15 +24,15 @@
             </thead>
             <tbody>
                 @foreach (var article in Model)
-            {
-                <tr>
-                    <td></td>
-                    <td>@article.Id</td>
-                    <td>@article.Title</td>
-                    <td>@article.CreateTime</td>
-                    <td>@article.ModifyTime</td>
-                </tr>
-        }
+                {
+                    <tr>
+                        <td></td>
+                        <td>@article.Id</td>
+                        <td>@article.Title</td>
+                        <td>@article.CreateTime</td>
+                        <td>@article.ModifyTime</td>
+                    </tr>
+                }
             </tbody>
         </table>
 
@@ -52,13 +52,13 @@
 
         table.init('article-table', { //转化静态表格
             //height: 'full-500'
-        }); 
+        });
 
         //监听工具条
         table.on('tool(article-table)', function (obj) {
             var row = obj.data;
             if (obj.event === 'detail') {
-                window.location.href = "/Home/Details?id=" + data.id;
+                window.location.href = "/Home/Details?id=" + row.id;
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
@@ -67,37 +67,47 @@
                         data: { ids: row.id },
                         success: function (data) {
                             console.log(data);
-                            if (data == "ok") { 
+                            if (data == "ok") {
                                 obj.del();
                                 layer.close(index);
                             }
                         },
                         //dataType: 'JSON'
-                    });             
+                    });
                 });
             } else if (obj.event === 'edit') {
-                window.location.href = "/Admin/Article/Update?id=" + data.id;
+                window.location.href = "/Admin/Article/Update?id=" + row.id;
             }
         });
 
         var $ = layui.$, active = {
-            getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('articleTable')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            , getCheckLength: function () { //获取选中数目
-                var checkStatus = table.checkStatus('articleTable')
-                    , data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
-            }
-            , isAll: function () { //验证是否全选
+            deleteSelectAll: function () { //批量删除
                 var checkStatus = table.checkStatus('articleTable');
-                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                data = checkStatus.data;
+                if (data.length <= 0)
+                    return;
+                var list = [];
+
+                for (var i = 0; i < data.length; i++) {
+                    list[i] = data[i].id;
+                }
+                layer.confirm('确定删除这' + data.length + '列吗?', function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/Article/Delete',
+                        data: { ids: list },
+                        success: function (data) {
+                            if (data == "ok") {
+                                window.location.href = "/Admin/Home";
+                            }
+                        },
+                        //dataType: 'JSON'
+                    });
+                });
             }
         };
 
-        $('.demoTable .layui-btn').on('click', function () {
+        $('.btn-operation .layui-btn').on('click', function () {
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });

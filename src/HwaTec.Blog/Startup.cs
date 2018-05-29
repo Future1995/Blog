@@ -29,7 +29,9 @@ namespace HwaTec.Blog
 
             services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IRepository<Article>, Repository<Article>>();
+            services.AddScoped<IRepository<UserInfo>, Repository<UserInfo>>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IUserInfoService, UserInfoService>();
             services.AddScoped<DbContext, BlogDbContext>();
 
             services.AddUEditorService();

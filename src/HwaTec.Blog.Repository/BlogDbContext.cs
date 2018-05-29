@@ -14,6 +14,7 @@ namespace HwaTec.Blog.Repository
         }
 
         public virtual DbSet<Article> Article { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
 
     }
 }

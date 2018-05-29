@@ -5,18 +5,21 @@ using System.Threading.Tasks;
 using HwaTec.Blog.Model;
 using HwaTec.Blog.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HwaTec.Blog.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
 
 
         private readonly IArticleService _articleService;
-        public ArticleController(IArticleService articleService)
+        private readonly IMemoryCache _memoryCache;
+        public ArticleController(IArticleService articleService, IMemoryCache memoryCache):base(memoryCache)
         {
             _articleService = articleService;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -68,11 +71,13 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(string ids)
+        public IActionResult Delete(int[] ids)
         {
-            var idList = ids.Split(",").Select(x => Convert.ToInt32(x));
-            _articleService.Delete(idList);
+            _articleService.Delete(ids);
             return Json("ok");
         }
+
+ 
+
     }
 }

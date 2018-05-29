@@ -11,9 +11,10 @@ using System;
 namespace HwaTec.Blog.Repository.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180529025707_add_UserInfo")]
+    partial class add_UserInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +38,7 @@ namespace HwaTec.Blog.Repository.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int>("TypeId");
+                    b.Property<int?>("TypeId");
 
                     b.HasKey("Id");
 
@@ -52,8 +53,6 @@ namespace HwaTec.Blog.Repository.Migrations
                     b.Property<int?>("Age");
 
                     b.Property<string>("Email");
-
-                    b.Property<string>("HeadImage");
 
                     b.Property<string>("Name");
 
