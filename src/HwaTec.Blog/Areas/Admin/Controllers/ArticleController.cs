@@ -13,10 +13,9 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
     public class ArticleController : BaseController
     {
 
-
         private readonly IArticleService _articleService;
         private readonly IMemoryCache _memoryCache;
-        public ArticleController(IArticleService articleService, IMemoryCache memoryCache):base(memoryCache)
+        public ArticleController(IArticleService articleService, IMemoryCache memoryCache) : base(memoryCache)
         {
             _articleService = articleService;
             _memoryCache = memoryCache;
@@ -37,7 +36,8 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
                 Title = title,
                 Synopsis = synopsis,
                 Content = content,
-                ModifyTime = DateTime.Now
+                ModifyTime = DateTime.Now,
+                CreateId = this.LoginUser.Id
             };
             _articleService.Add(article);
             return Json("ok");
@@ -53,7 +53,10 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         public IActionResult GetArticles()
         {
             var totalCount = 0;
-            var articles = _articleService.LoadEntities(out totalCount);
+            var query = _articleService.LoadEntities(out totalCount);
+            var articles = from a in query
+                           where a.Id == LoginUser.Id
+                           select a;
             return Json(new { code = 0, msg = "", count = totalCount, data = articles });
         }
 
@@ -76,8 +79,6 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             _articleService.Delete(ids);
             return Json("ok");
         }
-
- 
 
     }
 }
