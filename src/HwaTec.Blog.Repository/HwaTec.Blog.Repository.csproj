@@ -14,10 +14,4 @@
     <ProjectReference Include="..\HwaTec.Blog.Model\HwaTec.Blog.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Hosting">
-      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.hosting\2.0.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

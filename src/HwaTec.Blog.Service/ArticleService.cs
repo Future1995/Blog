@@ -37,7 +37,17 @@ namespace HwaTec.Blog.Service
 
         public bool Update(Article article)
         {
-           return _articleRepository.UpdateEntity(article);
+            try
+            {
+                var result = _articleRepository.UpdateEntity(article);
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+  
         }
     }
 }

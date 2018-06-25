@@ -35,7 +35,7 @@
         $.ajax({
             type: 'POST',
             url: '/Admin/Article/Update',
-            data: { title: title, synopsis: synopsis ,createTime:'@Model.CreateTime',content: content },
+            data: {Id:@Model.Id,CreateId:'@Model.CreateId', Title: title, Synopsis: synopsis ,CreateTime:'@Model.CreateTime',Content: content },
             success: function (data) {
                 console.log(data);
                 window.location.href = "/Admin/Home";

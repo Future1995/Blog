@@ -26,7 +26,6 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(string title, string synopsis, string content)
         {
@@ -42,13 +41,11 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             _articleService.Add(article);
             return Json("ok");
         }
-
         public IActionResult Details(int id)
         {
             var article = _articleService.GetById(id);
             return View(article);
         }
-
         [HttpGet]
         public IActionResult GetArticles()
         {
@@ -59,7 +56,7 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
                            select a;
             return Json(new { code = 0, msg = "", count = totalCount, data = articles });
         }
-
+        [HttpGet]
         public IActionResult Update(int id)
         {
             var article = _articleService.GetById(id);
@@ -70,9 +67,8 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         {
             article.ModifyTime = DateTime.Now;
             _articleService.Update(article);
-            return View(article);
+            return Json("ok");
         }
-
         [HttpPost]
         public IActionResult Delete(int[] ids)
         {
