@@ -17,9 +17,19 @@ namespace HwaTec.Blog
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+                                .AddCommandLine(args)
+                                .Build();
+            String ip = config["ip"];
+            String port = config["port"];
+            Console.WriteLine($"ip={ip},port={port}");
+            return WebHost.CreateDefaultBuilder(args)
+                      .UseStartup<Startup>()
+                      .UseUrls($"http://{ip}:{port}")
+                      .Build();
+        }
+
     }
 }
