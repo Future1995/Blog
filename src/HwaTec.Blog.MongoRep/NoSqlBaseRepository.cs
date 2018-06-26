@@ -1,5 +1,4 @@
-﻿using HwaTec.Blog.IRep;
-using HwaTec.Blog.Model;
+﻿using HwaTec.Blog.Model;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -151,18 +150,7 @@ namespace HwaTec.Blog.MongoRep
             var filter = Builders<TEntity>.Filter.Eq(x=>x.Sysid, guid);
             return  Collection.Find(filter).FirstOrDefault();
         }
-
-        public IQueryable<TEntity> LoadEntities(Expression<Func<TEntity, bool>> whereLambda)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TEntity> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteEntities(object [] ids)
+        public void DeleteEntities(Guid [] ids)
         {
             var list = new List<WriteModel<TEntity>>();
 
@@ -172,11 +160,6 @@ namespace HwaTec.Blog.MongoRep
                 list.Add(new DeleteOneModel<TEntity>(filter));
             }
             Collection.BulkWriteAsync(list).Wait();
-        }
-
-        public int SaveChanges()
-        {
-            throw new NotImplementedException();
         }
     }
 }

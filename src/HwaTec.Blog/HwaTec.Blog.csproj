@@ -17,8 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\HwaTec.Blog.Model\HwaTec.Blog.Model.csproj" />
     <ProjectReference Include="..\HwaTec.Blog.MongoRep\HwaTec.Blog.Core.csproj" />
-    <ProjectReference Include="..\HwaTec.Blog.Repository\HwaTec.Blog.Repository.csproj" />
-    <ProjectReference Include="..\HwaTec.Blog.Service\HwaTec.Blog.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

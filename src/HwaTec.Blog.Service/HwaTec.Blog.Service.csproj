@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HwaTec.Blog.Model\HwaTec.Blog.Model.csproj" />
-    <ProjectReference Include="..\HwaTec.Blog.Repository\HwaTec.Blog.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using HwaTec.Blog.Model;
 using HwaTec.Blog.MongoRep;
-using HwaTec.Blog.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UEditorNetCore;
 using HwaTec.Blog.DependencyManagement;
-using HwaTec.Blog.IRep;
 
 namespace HwaTec.Blog
 {
@@ -29,12 +27,11 @@ namespace HwaTec.Blog
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDependencyRegister("^HwaTec.Blog");
             services.ConfigureMongo(Configuration);
 
-            services.AddScoped<NoSqlBaseRepository<Article>>();
-            services.AddScoped<NoSqlBaseRepository<UserInfo>>();
+            //services.AddScoped<NoSqlBaseRepository<Article>>();
+            //services.AddScoped<NoSqlBaseRepository<UserInfo>>();
 
             services.AddUEditorService();
 

@@ -22,7 +22,7 @@ namespace HwaTec.Blog.Controllers
             return View(articles);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid id)
         {
             var article = _articleRep.GetById(id);
             return View(article);

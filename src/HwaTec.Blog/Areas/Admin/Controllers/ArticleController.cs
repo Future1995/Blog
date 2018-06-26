@@ -41,7 +41,7 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             _articleRep.Add(article);
             return Json("ok");
         }
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid id)
         {
             var article = _articleRep.GetById(id);
             return View(article);
@@ -59,7 +59,7 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             return Json(new { code = 0, msg = "", count = articles.Count() , data = articles });
         }
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(Guid id)
         {
             var article = _articleRep.GetById(id);
             return View(article);
@@ -72,7 +72,7 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             return Json("ok");
         }
         [HttpPost]
-        public IActionResult Delete(object[] ids)
+        public IActionResult Delete(Guid [] ids)
         {
             _articleRep.DeleteEntities(ids);
             return Json("ok");

@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HwaTec.Blog.IRep\HwaTec.Blog.IRep.csproj" />
     <ProjectReference Include="..\HwaTec.Blog.Model\HwaTec.Blog.Model.csproj" />
   </ItemGroup>
 
