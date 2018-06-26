@@ -1,5 +1,5 @@
 ﻿@using HwaTec.Blog.Model
-@model IQueryable<Article>
+@model IList<Article>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -27,7 +27,7 @@
                 {
                     <tr>
                         <td></td>
-                        <td>@article.Id</td>
+                        <td>@article.Sysid</td>
                         <td>@article.Title</td>
                         <td>@article.CreateTime</td>
                         <td>@article.ModifyTime</td>

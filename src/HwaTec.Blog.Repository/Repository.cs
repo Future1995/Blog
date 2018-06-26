@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HwaTec.Blog.IRep;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace HwaTec.Blog.Repository
             _context = context;
         }
 
-        public T AddEntity(T entity)
+        public T Add(T entity)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace HwaTec.Blog.Repository
             return entity;
         }
 
-        public bool DeleteEntity(T entity)
+        public bool Delete(T entity)
         {
             _context.Entry<T>(entity).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
@@ -61,7 +62,7 @@ namespace HwaTec.Blog.Repository
             return temp;
         }
 
-        public bool UpdateEntity(T entity)
+        public bool Update(T entity)
         {
             _context.Entry<T>(entity).State = EntityState.Modified;
             return _context.SaveChanges() > 0;

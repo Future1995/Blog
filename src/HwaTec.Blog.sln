@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaTec.Blog", "HwaTec.Blog\HwaTec.Blog.csproj", "{040A3D81-76E7-4447-92EC-C83675377549}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HwaTec.Blog", "HwaTec.Blog\HwaTec.Blog.csproj", "{040A3D81-76E7-4447-92EC-C83675377549}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaTec.Blog.Service", "HwaTec.Blog.Service\HwaTec.Blog.Service.csproj", "{5DD28EB6-3071-4933-8207-423805DB9B4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HwaTec.Blog.Service", "HwaTec.Blog.Service\HwaTec.Blog.Service.csproj", "{5DD28EB6-3071-4933-8207-423805DB9B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaTec.Blog.Repository", "HwaTec.Blog.Repository\HwaTec.Blog.Repository.csproj", "{3F145C02-94BD-4F18-9712-45BA5657C22B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HwaTec.Blog.Repository", "HwaTec.Blog.Repository\HwaTec.Blog.Repository.csproj", "{3F145C02-94BD-4F18-9712-45BA5657C22B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaTec.Blog.Model", "HwaTec.Blog.Model\HwaTec.Blog.Model.csproj", "{D097DB61-F5A2-47E4-BCB2-BB692A599050}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HwaTec.Blog.Model", "HwaTec.Blog.Model\HwaTec.Blog.Model.csproj", "{D097DB61-F5A2-47E4-BCB2-BB692A599050}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaTec.Blog.Core", "HwaTec.Blog.MongoRep\HwaTec.Blog.Core.csproj", "{53B2C872-2A61-4B2B-932C-DC5F63883037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HwaTec.Blog.IRep", "HwaTec.Blog.IRep\HwaTec.Blog.IRep.csproj", "{841E6B32-6DFA-4E67-9153-0D055BD2FE61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{D097DB61-F5A2-47E4-BCB2-BB692A599050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D097DB61-F5A2-47E4-BCB2-BB692A599050}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D097DB61-F5A2-47E4-BCB2-BB692A599050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53B2C872-2A61-4B2B-932C-DC5F63883037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53B2C872-2A61-4B2B-932C-DC5F63883037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53B2C872-2A61-4B2B-932C-DC5F63883037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53B2C872-2A61-4B2B-932C-DC5F63883037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841E6B32-6DFA-4E67-9153-0D055BD2FE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841E6B32-6DFA-4E67-9153-0D055BD2FE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841E6B32-6DFA-4E67-9153-0D055BD2FE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841E6B32-6DFA-4E67-9153-0D055BD2FE61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HwaTec.Blog.Model;
-using HwaTec.Blog.Service;
+using HwaTec.Blog.MongoRep;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -12,11 +12,11 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
     [Area("Admin")]
     public class AccountController : Controller
     {
-        private IUserInfoService _userInfoService;
+        private NoSqlBaseRepository<UserInfo> _userInfoRep;
         private IMemoryCache _memoryCache;
-        public AccountController(IUserInfoService userInfoService, IMemoryCache memoryCache)
+        public AccountController(NoSqlBaseRepository<UserInfo> userInfoRep, IMemoryCache memoryCache)
         {
-            _userInfoService = userInfoService;
+            _userInfoRep = userInfoRep;
             _memoryCache = memoryCache;
         }
         [HttpGet]
@@ -28,8 +28,8 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
         public IActionResult Login(string userName, string password)
         {
 
-            var userInfo = _userInfoService.Login(userName, password);
-            if (userInfo != null)
+            var userInfo = _userInfoRep.GetByProperty(x => x.UserCode, userName);
+            if (userInfo != null && userInfo.Password == password)
             {
                 var sessionId = Guid.NewGuid().ToString();
                 this.HttpContext.Response.Cookies.Append("sessionId", sessionId);
@@ -40,6 +40,19 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
             {
                 return Json("no");
             }
+        }
+
+        public IActionResult InitUser()
+        {
+            try
+            {
+                _userInfoRep.Add(new UserInfo { UserCode = "shitong", Password = "shitong" });
+            }
+            catch (Exception)
+            {
+                return Content("Error");
+            }
+            return Content("ok");
         }
     }
 }

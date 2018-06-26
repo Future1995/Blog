@@ -4,10 +4,8 @@ using System.Text;
 
 namespace HwaTec.Blog.Model
 {
-    public class UserInfo
+    public class UserInfo: MongoEntityBase
     {
-        public int Id { get; set; }
-
         public string UserCode { get; set; }
         public string UserNick { get; set; }
         public string Password { get; set; }
@@ -18,4 +16,5 @@ namespace HwaTec.Blog.Model
         public string Phone { get; set; }
         public string  HeadImage { get; set; }
     }
+
 }

@@ -4,18 +4,18 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace HwaTec.Blog.Repository
+namespace HwaTec.Blog.IRep
 {
     public interface IRepository<T>
-        where T : class, new()
+        where T : class
     {
         T GetById(object id);
         IQueryable<T> LoadEntities(Expression<Func<T, bool>> whereLambda);
         IQueryable<T> LoadPageEntities<S>(int pageIndex, int pageSize, out int totalCount, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderbyLambda, bool isAsc);
-        bool DeleteEntity(T entity);
+        bool Delete(T entity);
         void DeleteEntities(IEnumerable<T> entities);
-        bool UpdateEntity(T entity);
-        T AddEntity(T entity);
+        bool Update(T entity);
+        T Add(T entity);
         int SaveChanges();
         IQueryable<T> Table { get; }
     }

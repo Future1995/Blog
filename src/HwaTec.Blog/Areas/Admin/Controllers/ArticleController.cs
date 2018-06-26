@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HwaTec.Blog.Model;
-using HwaTec.Blog.Service;
+using HwaTec.Blog.MongoRep;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -13,11 +13,11 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
     public class ArticleController : BaseController
     {
 
-        private readonly IArticleService _articleService;
+        private readonly NoSqlBaseRepository<Article> _articleRep;
         private readonly IMemoryCache _memoryCache;
-        public ArticleController(IArticleService articleService, IMemoryCache memoryCache) : base(memoryCache)
+        public ArticleController(NoSqlBaseRepository<Article> articleRep, IMemoryCache memoryCache) : base(memoryCache)
         {
-            _articleService = articleService;
+            _articleRep = articleRep;
             _memoryCache = memoryCache;
         }
 
@@ -36,43 +36,45 @@ namespace HwaTec.Blog.Areas.Admin.Controllers
                 Synopsis = synopsis,
                 Content = content,
                 ModifyTime = DateTime.Now,
-                CreateId = this.LoginUser.Id
+                CreateId = this.LoginUser.Sysid
             };
-            _articleService.Add(article);
+            _articleRep.Add(article);
             return Json("ok");
         }
         public IActionResult Details(int id)
         {
-            var article = _articleService.GetById(id);
+            var article = _articleRep.GetById(id);
             return View(article);
         }
         [HttpGet]
         public IActionResult GetArticles()
         {
-            var totalCount = 0;
-            var query = _articleService.LoadEntities(out totalCount);
-            var articles = from a in query
-                           where a.CreateId == LoginUser.Id
-                           select a;
-            return Json(new { code = 0, msg = "", count = totalCount, data = articles });
+            //var totalCount = 0;
+            //var query = _articleRep.LoadEntities(out totalCount);
+            //var articles = from a in query
+            //               where a.CreateId == LoginUser.Id
+            //               select a;
+           var articles= _articleRep.GetAll();
+           
+            return Json(new { code = 0, msg = "", count = articles.Count() , data = articles });
         }
         [HttpGet]
         public IActionResult Update(int id)
         {
-            var article = _articleService.GetById(id);
+            var article = _articleRep.GetById(id);
             return View(article);
         }
         [HttpPost]
         public IActionResult Update(Article article)
         {
             article.ModifyTime = DateTime.Now;
-            _articleService.Update(article);
+            _articleRep.Update(article);
             return Json("ok");
         }
         [HttpPost]
-        public IActionResult Delete(int[] ids)
+        public IActionResult Delete(object[] ids)
         {
-            _articleService.Delete(ids);
+            _articleRep.DeleteEntities(ids);
             return Json("ok");
         }
 

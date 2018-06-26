@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HwaTec.Blog.Model.Article>
+﻿@model IList<HwaTec.Blog.Model.Article>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,14 +13,14 @@
     @foreach (var article in Model)
     {
         <article>
-            <h2 class="title"><a href="/Home/Details?id=@article.Id">@article.Title</a></h2>
+            <h2 class="title"><a href="/Home/Details?id=@article.Sysid">@article.Title</a></h2>
             <ul class="text">
                 <p>
                     @Html.Raw(article.Synopsis)
                 </p>
             </ul>
             <div class="textfoot">
-                <a href="/Home/Details?id=@article.Id">阅读全文</a>
+                <a href="/Home/Details?id=@article.Sysid">阅读全文</a>
             </div>
         </article>
     }
