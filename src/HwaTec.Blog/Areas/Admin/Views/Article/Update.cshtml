@@ -21,13 +21,13 @@
     </div>
 </div>
 
-
+@section Script{ 
 <script type="text/javascript">
 
     var ue = UE.getEditor('editor');
 
     $("#btnSubmit").click(function () {
-    
+
         var title = $("#txt_title").val();
         var content = ue.getContent();
         var contentTxt = ue.getContentTxt();
@@ -35,7 +35,7 @@
         $.ajax({
             type: 'POST',
             url: '/Admin/Article/Update',
-            data: {Id:@Model.Sysid,CreateId:'@Model.CreateId', Title: title, Synopsis: synopsis ,CreateTime:'@Model.CreateTime',Content: content },
+            data: {Id:'@Model.Sysid',CreateId:'@Model.CreateId', Title: title, Synopsis: synopsis ,CreateTime:'@Model.CreateTime',Content: content },
             success: function (data) {
                 console.log(data);
                 window.location.href = "/Admin/Home";
@@ -44,3 +44,5 @@
         });
     });
 </script>
+}
+
